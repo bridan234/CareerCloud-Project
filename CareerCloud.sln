@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloud.Pocos", "CareerCloud.Pocos\CareerCloud.Pocos.csproj", "{AEB78950-1C07-461E-BB84-D0EA4AAF3094}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerCloudCore.UnitTests.Assignment1", "CareerCloudCore.UnitTests.Assignment1\CareerCloudCore.UnitTests.Assignment1.csproj", "{F70501E1-F900-4B9B-A9A5-0F1A5131F30D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEB78950-1C07-461E-BB84-D0EA4AAF3094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB78950-1C07-461E-BB84-D0EA4AAF3094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB78950-1C07-461E-BB84-D0EA4AAF3094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB78950-1C07-461E-BB84-D0EA4AAF3094}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70501E1-F900-4B9B-A9A5-0F1A5131F30D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70501E1-F900-4B9B-A9A5-0F1A5131F30D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70501E1-F900-4B9B-A9A5-0F1A5131F30D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70501E1-F900-4B9B-A9A5-0F1A5131F30D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACD92CE9-C831-4300-A1AC-53598AD64C70}
+	EndGlobalSection
+EndGlobal
