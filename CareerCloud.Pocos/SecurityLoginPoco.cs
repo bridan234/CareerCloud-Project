@@ -35,5 +35,11 @@ namespace CareerCloud.Pocos
         public string PrefferredLanguage {get; set;}
         [Column("Time_Stamp")]
         public Byte[] TimeStamp {get; set;}
+
+        #region Navigational-Pointer ...
+            public virtual ApplicantProfilePoco ApplicantProfile {get; set;}
+            public virtual ICollection<SecurityLoginsLogPoco> SecurityLoginsLogs {get; set;}
+            public virtual SecurityLoginsRolePoco SecurityLoginsRole {get; set;}
+        #endregion
     }
 }

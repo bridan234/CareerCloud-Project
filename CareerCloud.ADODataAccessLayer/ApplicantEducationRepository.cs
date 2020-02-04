@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Linq.Expressions;
 using System.Data.SqlClient;
-using System.Linq;
+using System.Linq; 
 
 namespace CareerCloud.ADODataAccessLayer
 {
@@ -58,7 +58,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Completion_Percent", poco.CompletionPercent);
 
                     con.Open();
-                    int rowsEffected = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     con.Close();
                 }
             }

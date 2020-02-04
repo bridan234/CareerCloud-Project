@@ -12,5 +12,10 @@ namespace CareerCloud.Pocos
         [Key]
         public string Code { get; set; }
         public string Name { get; set; }
+
+        #region Navigational-Pointer ...
+            public virtual ICollection<ApplicantProfilePoco> ApplicantProfiles {get; set;}
+            public virtual ICollection<ApplicantWorkHistoryPoco> ApplicantWorkHistories {get; set;}
+        #endregion
     }
 }

@@ -54,7 +54,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Company_Logo", poco.CompanyLogo);
 
                     con.Open();
-                    int rowsEffected = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     con.Close();
                 }
             }

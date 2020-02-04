@@ -45,7 +45,7 @@ namespace CareerCloud.ADODataAccessLayer
                     cmd.Parameters.AddWithValue("@Role", poco.Role);
 
                     con.Open();
-                    int rowsEffected = cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     con.Close();
                 }
             }
