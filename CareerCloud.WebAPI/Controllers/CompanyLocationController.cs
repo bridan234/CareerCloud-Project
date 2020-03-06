@@ -62,7 +62,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpDelete, Route("location")]
         public ActionResult DeleteCompanyLocation([FromBody]CompanyLocationPoco[] poco)
         {
-            _logic.Add(poco);
+            _logic.Delete(poco);
 
             return Ok();
         }

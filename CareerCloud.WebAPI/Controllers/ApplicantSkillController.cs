@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CareerCloud.BusinessLogicLayer;
+﻿using CareerCloud.BusinessLogicLayer;
 using CareerCloud.EntityFrameworkDataAccess;
 using CareerCloud.Pocos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CareerCloud.WebAPI.Controllers
 {
@@ -61,7 +57,7 @@ namespace CareerCloud.WebAPI.Controllers
         [HttpDelete, Route("skill")]
         public ActionResult DeleteApplicantSkill([FromBody]ApplicantSkillPoco[] poco)
         {
-            _logic.Add(poco);
+            _logic.Delete(poco);
 
             return Ok();
         }
