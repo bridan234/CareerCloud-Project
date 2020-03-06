@@ -18,7 +18,7 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             foreach (CompanyProfilePoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.CompanyWebsite) || !Regex.IsMatch(poco.CompanyWebsite, @"^\w(?i)(\.ca|\.com|\.biz)\b"))
+                if (string.IsNullOrEmpty(poco.CompanyWebsite) || !Regex.IsMatch(poco.CompanyWebsite, @"(\.ca|\.com|\.biz)\z"))
                     exceptions.Add(new ValidationException(600, $"Critical Error!, a Valid Company websites must end with the following extensions – \".ca\", \".com\", \".biz\""));
                 if (string.IsNullOrEmpty(poco.ContactPhone) || !Regex.IsMatch(poco.ContactPhone, @"\b(\d{3}-\d{3}-\d{4})\b"))
                     exceptions.Add(new ValidationException(601, $"Critical Error! Contact phone, Must correspond to a valid phonenumber format(xxx-xxx-xxxx)"));

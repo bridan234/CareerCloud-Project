@@ -48,7 +48,7 @@ namespace CareerCloud.BusinessLogicLayer
 			_repository.Update(pocos);
 		}
 
-		public void Delete(TPoco[] pocos)
+		public virtual void Delete(TPoco[] pocos)
 		{
 			_repository.Remove(pocos);
 		}

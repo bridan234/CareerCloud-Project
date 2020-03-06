@@ -18,10 +18,10 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             foreach (CompanyDescriptionPoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.CompanyDescription) || !Regex.IsMatch(poco.CompanyDescription, @"/{3,}/"))
+                if (string.IsNullOrEmpty(poco.CompanyDescription) || !Regex.IsMatch(poco.CompanyDescription, @"^.{3,}$"))
                     exceptions.Add(new ValidationException(107, "Sorry! Comppany Description must be greater than 2 characters"));
                  
-                if (string.IsNullOrEmpty(poco.CompanyName) || !Regex.IsMatch(poco.CompanyName, @"/{3,}/"))
+                if (string.IsNullOrEmpty(poco.CompanyName) || !Regex.IsMatch(poco.CompanyName, @"^.{3,}$"))
                     exceptions.Add(new ValidationException(106, "Sorry! Company Name must be greater than 2 Characters"));
                 }
 

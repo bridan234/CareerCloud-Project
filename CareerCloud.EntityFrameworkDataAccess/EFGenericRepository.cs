@@ -18,9 +18,10 @@ namespace CareerCloud.EntityFrameworkDataAccess
         }
         public void Add(params T[] items)
         {
+            _context.Set<T>();
             foreach (T item in items)
             _context.Entry(item).State = EntityState.Added;
-
+            
             _context.SaveChanges();
         }
 

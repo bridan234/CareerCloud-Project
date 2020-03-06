@@ -18,7 +18,7 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             foreach (ApplicantWorkHistoryPoco poco in pocos)
             {
-                if (!Regex.IsMatch(poco.CompanyName, @"/{3,}/"))
+                if (!Regex.IsMatch(poco.CompanyName, @"^.{3,}$"))
                     exceptions.Add(new ValidationException(105,"Company Name must be greater than2 Characters"));
             }
 

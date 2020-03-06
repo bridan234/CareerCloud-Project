@@ -18,7 +18,7 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             foreach  (CompanyJobEducationPoco poco in pocos)
             {
-                if (string.IsNullOrEmpty(poco.Major) || !Regex.IsMatch(poco.Major, @"/{3,}/"))
+                if (string.IsNullOrEmpty(poco.Major) || !Regex.IsMatch(poco.Major, @"^.{3,}$"))
                     exceptions.Add(new ValidationException(200, "Critical Error occured! \n *Major* field must be greater than 2 Charaters"));
                 if (poco.Importance < 0)
                     exceptions.Add(new ValidationException(201, "Sorry! Importance cannot be less than 0"));

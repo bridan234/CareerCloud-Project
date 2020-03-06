@@ -17,16 +17,16 @@ namespace CareerCloud.BusinessLogicLayer
             List<ValidationException> exceptions = new List<ValidationException>();
             foreach (ApplicantSkillPoco poco in pocos)
             {
-                if (poco.StartMonth>12)
+                if (poco.StartMonth > 12)
                 {
-                    exceptions.Add(new ValidationException(101,"Oops! Start Month or End Month cannot be greater than 12"));
+                    exceptions.Add(new ValidationException(101, "Oops! Start Month or End Month cannot be greater than 12"));
                 }
-                if (poco.EndMonth>12)
-                exceptions.Add(new ValidationException(102,"Oops! Start Month or End Month cannot be greater than 12"));
-                if (poco.StartYear<1900)
-                exceptions.Add(new ValidationException(103,"Oops! Start Year cannot be less than 1900"));
+                if (poco.EndMonth > 12)
+                    exceptions.Add(new ValidationException(102, "Oops! Start Month or End Month cannot be greater than 12"));
+                if (poco.StartYear < 1900)
+                    exceptions.Add(new ValidationException(103, "Oops! Start Year cannot be less than 1900"));
                 if (poco.EndYear < poco.StartYear)
-                exceptions.Add(new ValidationException(104,"Oops! End Year cannot be less than the start year"));
+                    exceptions.Add(new ValidationException(104, "Oops! End Year cannot be less than the start year"));
             }
             if (exceptions.Count > 0)
                 throw new AggregateException(exceptions);
@@ -42,5 +42,6 @@ namespace CareerCloud.BusinessLogicLayer
             Verify(pocos);
             base.Update(pocos);
         }
+       
     }
 }

@@ -81,7 +81,7 @@ namespace CareerCloud.ADODataAccessLayer
                 SqlDataReader reader = cmd.ExecuteReader();
 
 
-                CompanyJobSkillPoco[] pocos = new CompanyJobSkillPoco[5003];
+                CompanyJobSkillPoco[] pocos = new CompanyJobSkillPoco[9003];
                 int index = 0;
 
                 while (reader.Read())
