@@ -37,6 +37,25 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllCompanyJobSkillsPayload> GetAllCompanyJobSkill(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Job Skill record was found");
+
+            var AllCompanyJobSkillsPayload = new AllCompanyJobSkillsPayload();
+
+            Pocos.ForEach(poco => AllCompanyJobSkillsPayload.CompanyJobSkills.Add(new CompanyJobSkillsPayload
+            {
+                Id = poco.Id.ToString(),
+                Importance = poco.Importance,
+                Job = poco.Job.ToString(),
+                Skill = poco.Skill,
+                SkillLevel = poco.SkillLevel
+            }));
+
+            return new Task<AllCompanyJobSkillsPayload>(() => AllCompanyJobSkillsPayload);
+        }
+
         public override Task<Empty> CreateCompanyJobSkill(CompanyJobSkillsPayload request, ServerCallContext context)
         {
             CompanyJobSkillPoco poco = new CompanyJobSkillPoco()

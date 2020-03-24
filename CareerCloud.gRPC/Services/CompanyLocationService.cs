@@ -39,6 +39,27 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllCompanyLocationPayload> GetAllCompanyLocation(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Location record was found");
+
+            var AllCompanyLocationPayload = new AllCompanyLocationPayload();
+
+            Pocos.ForEach(poco => AllCompanyLocationPayload.CompanyLocations.Add(new CompanyLocationPayload
+            {
+                Id = poco.Id.ToString(),
+                Company = poco.Company.ToString(),
+                Street = poco.Street,
+                City = poco.City,
+                Province = poco.Province,
+                CountryCode = poco.CountryCode,
+                PostalCode = poco.PostalCode,
+            }));
+
+            return new Task<AllCompanyLocationPayload>(() => AllCompanyLocationPayload);
+        }
+
         public override Task<Empty> CreateCompanyLocation(CompanyLocationPayload request, ServerCallContext context)
         {
             CompanyLocationPoco poco = new CompanyLocationPoco()

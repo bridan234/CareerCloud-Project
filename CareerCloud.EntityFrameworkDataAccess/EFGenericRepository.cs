@@ -33,8 +33,9 @@ namespace CareerCloud.EntityFrameworkDataAccess
         public IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
             IQueryable<T> dbQuery =_context.Set<T>();
-            foreach (Expression<Func<T, Object>> Properties in navigationProperties)
-                dbQuery = dbQuery.Include<T, Object>(Properties);
+            //foreach (Expression<Func<T, object>> Properties in navigationProperties)
+                //dbQuery.Include(Properties).Load();
+            navigationProperties.ToList().ForEach(c => dbQuery.Include(c).Load());
 
                 return dbQuery.ToList();
             

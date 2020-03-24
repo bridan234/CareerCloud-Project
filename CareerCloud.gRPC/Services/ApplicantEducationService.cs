@@ -38,6 +38,27 @@ namespace CareerCloud.gRPC.Services
             return appEdu;
         }
 
+        public override Task<AllApplicantEducationPayload> GetAllApplicantEducation(Empty req, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Education record was found");
+            
+            var AllApplicantEducationPayload = new AllApplicantEducationPayload();
+            
+            Pocos.ForEach(poco => AllApplicantEducationPayload.ApplicantEducations.Add(new ApplicantEducationPayload 
+            {
+                Id = poco.Id.ToString(), 
+                Applicant = poco.Applicant.ToString(),
+                Major = poco.Major,
+                CertificateDiploma = poco.CertificateDiploma,
+                StartDate = poco.StartDate is null ? null : Timestamp.FromDateTime((DateTime)poco.StartDate),
+                CompletionDate = poco.CompletionDate is null ? null : Timestamp.FromDateTime((DateTime)poco.CompletionDate),
+                CompletionPercent = poco.CompletionPercent is null ? 0 : (int)poco.CompletionPercent
+            }));
+
+            return new Task<AllApplicantEducationPayload>(() => AllApplicantEducationPayload) ;
+        }
+
         public override Task<Empty> CreateApplicantEducation(ApplicantEducationPayload request, ServerCallContext context)
         {
             var pocos = new ApplicantEducationPoco[]{ new ApplicantEducationPoco() {

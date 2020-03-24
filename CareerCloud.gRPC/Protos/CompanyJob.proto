@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 service CompanyJob{
 	rpc ReadCompanyJob (CompanyJobIdRequest) returns (CompanyJobPayload);
-	//rpc GetAllCompanyJob (google.protobuf.Empty) returns (CompanyJobPayload);
+	rpc GetAllCompanyJob (google.protobuf.Empty) returns (AllCompanyJobPayload);
 	rpc CreateCompanyJob (CompanyJobPayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyJob (CompanyJobPayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyJob (CompanyJobPayload) returns (google.protobuf.Empty);
@@ -25,5 +25,8 @@ message CompanyJobPayload {
 	google.protobuf.Timestamp ProfileCreadted = 3;
 	bool IsInactive = 4;
 	bool IsCompanyHidden = 5;
+}
 
+message AllCompanyJobPayload {
+	repeated CompanyJobPayload CompanyJobs = 1;
 }

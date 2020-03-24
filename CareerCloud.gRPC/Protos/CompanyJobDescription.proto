@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service CompanyJobDescription{
 	rpc ReadCompanyJobDescription (CompanyJobDescriptionIdRequest) returns (CompanyJobDescriptionPayload);
-	//rpc GetAllCompanyJobDescription (google.protobuf.Empty) returns (CompanyJobDescriptionPayload);
+	rpc GetAllCompanyJobDescription (google.protobuf.Empty) returns (AllCompanyJobDescriptionPayload);
 	rpc CreateCompanyJobDescription (CompanyJobDescriptionPayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyJobDescription (CompanyJobDescriptionPayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyJobDescription (CompanyJobDescriptionPayload) returns (google.protobuf.Empty);
@@ -23,4 +23,8 @@ message CompanyJobDescriptionPayload {
 	string Job = 2;
 	string JobName = 3;
 	string JobDescription = 4;
+}
+
+message AllCompanyJobDescriptionPayload {
+	repeated CompanyJobDescriptionPayload CompanyJobDescriptions = 1;
 }

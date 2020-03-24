@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service CompanyLocation{
 	rpc ReadCompanyLocation (CompanyLocationIdRequest) returns (CompanyLocationPayload);
-	//rpc GetAllCompanyLocation (google.protobuf.Empty) returns (CompanyLocationPayload);
+	rpc GetAllCompanyLocation (google.protobuf.Empty) returns (AllCompanyLocationPayload);
 	rpc CreateCompanyLocation (CompanyLocationPayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyLocation (CompanyLocationPayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyLocation (CompanyLocationPayload) returns (google.protobuf.Empty);
@@ -26,5 +26,8 @@ message CompanyLocationPayload {
 	string Street = 5;
 	string City = 6;
 	string PostalCode = 7;
+}
 
+message AllCompanyLocationPayload {
+	repeated CompanyLocationPayload CompanyLocations = 1;
 }

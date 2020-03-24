@@ -29,7 +29,7 @@ namespace CareerCloud.WebAPI.Controllers
             var poco = _logic.Get(Id);
 
             if (poco == null) return NotFound();
-
+            //poco.ApplicantProfile = new ApplicantProfileLogic(new EFGenericRepository<ApplicantProfilePoco>()).Get(poco.Applicant));
             return Ok(poco);
         }
 

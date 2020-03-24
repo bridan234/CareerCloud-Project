@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 service CompanyProfile{
 	rpc ReadCompanyProfile (CompanyProfileIdRequest) returns (CompanyProfilePayload);
-	//rpc GetAllCompanyProfile (google.protobuf.Empty) returns (CompanyProfilePayload);
+	rpc GetAllCompanyProfile (google.protobuf.Empty) returns (AllCompanyProfilePayload);
 	rpc CreateCompanyProfile (CompanyProfilePayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyProfile (CompanyProfilePayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyProfile (CompanyProfilePayload) returns (google.protobuf.Empty);
@@ -26,5 +26,8 @@ message CompanyProfilePayload {
 	string ContactPhone = 4;
 	string ContactName = 5;
 	bytes CompanyLogo = 6;
+}
 
+message AllCompanyProfilePayload {
+	repeated CompanyProfilePayload CompanyProfiles = 1;
 }

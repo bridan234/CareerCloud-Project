@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service SystemCountryCode {
 	rpc ReadSystemCountryCode (SystemCountryCodeCodeRequest) returns (SystemCountryCodePayload);
-	//rpc GetAllSystemCountryCode (google.protobuf.Empty) returns (SecurityRolePayload);
+	rpc GetAllSystemCountryCode (google.protobuf.Empty) returns (AllSystemCountryCodePayload);
 	rpc CreateSystemCountryCode (SystemCountryCodePayload) returns (google.protobuf.Empty);
 	rpc UpdateSystemCountryCode (SystemCountryCodePayload) returns (google.protobuf.Empty);
 	rpc DeleteSystemCountryCode (SystemCountryCodePayload) returns (google.protobuf.Empty);
@@ -21,4 +21,8 @@ message SystemCountryCodeCodeRequest{
 message SystemCountryCodePayload {
 	string Code = 1;
 	string Name = 2;
+}
+
+message AllSystemCountryCodePayload {
+	repeated SystemCountryCodePayload SystemCountryCodes = 1;
 }

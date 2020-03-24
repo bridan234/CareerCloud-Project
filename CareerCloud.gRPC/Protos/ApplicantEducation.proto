@@ -10,7 +10,7 @@ import "google/protobuf/timestamp.proto";
 service ApplicantEducation{
 
 rpc ReadApplicantEducation (ApplicantEducationIdRequest) returns (ApplicantEducationPayload);
-//rpc GetAllApplicantEducation (google.protobuf.Empty) returns (AllApplicantEducationPayload);
+rpc GetAllApplicantEducation (google.protobuf.Empty) returns (AllApplicantEducationPayload);
 rpc CreateApplicantEducation (ApplicantEducationPayload) returns (google.protobuf.Empty);
 rpc UpdateApplicantEducation (ApplicantEducationPayload) returns (google.protobuf.Empty);
 rpc DeleteApplicantEducation (ApplicantEducationPayload) returns (google.protobuf.Empty);
@@ -33,5 +33,5 @@ message ApplicantEducationPayload{
 }
 
 message AllApplicantEducationPayload{
-	repeated ApplicantEducationPayload Applicants = 1;
+	repeated ApplicantEducationPayload ApplicantEducations = 1;
 }

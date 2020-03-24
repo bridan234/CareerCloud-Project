@@ -43,6 +43,30 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllApplicantProfilePayload> GetAllApplicantProfile(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Profile record was found");
+
+            var AllApplicantProfilePayload = new AllApplicantProfilePayload();
+
+            Pocos.ForEach(poco => AllApplicantProfilePayload.ApplicantProfiles.Add(new ApplicantProfilePayload
+            {
+                Id = poco.Id.ToString(),
+                Login = poco.Login.ToString(),
+                Street = poco.Street,
+                City = poco.City,
+                Province = poco.Province,
+                PostalCode = poco.PostalCode,
+                Country = poco.Country,
+                Currency = poco.Currency,
+                CurrentRate = (double?)poco.CurrentRate,
+                CurrentSalary = (double?)poco.CurrentSalary
+            }));
+
+            return new Task<AllApplicantProfilePayload>(() => AllApplicantProfilePayload);
+        }
+
         public override Task<Empty> CreateApplicantProfile(ApplicantProfilePayload request, ServerCallContext context)
         {
             var poco = new ApplicantProfilePoco()

@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service ApplicantWorkHistory{
 	rpc ReadApplicantWorkHistory (ApplicantWorkHistoryIdRequest) returns (ApplicantWorkHistoryPayload);
-	//rpc GetAllApplicantResume (google.protobuf.Empty) returns (AllApplicantJobProfilePayload);
+	rpc GetAllApplicantWorkHistory (google.protobuf.Empty) returns (AllApplicantWorkHistoryPayload);
 	rpc CreateApplicantWorkHistory (ApplicantWorkHistoryPayload) returns (google.protobuf.Empty);
 	rpc UpdateApplicantWorkHistory (ApplicantWorkHistoryPayload) returns (google.protobuf.Empty);
 	rpc DeleteApplicantWorkHistory (ApplicantWorkHistoryPayload) returns (google.protobuf.Empty);
@@ -29,6 +29,9 @@ message ApplicantWorkHistoryPayload {
 	int32 StartYear = 8;
 	int32 EndMonth = 9;
 	int32 EndYear = 10;
-	string CompanyName = 11;
-	
+	string CompanyName = 11;	
+}
+
+message AllApplicantWorkHistoryPayload {
+	repeated ApplicantWorkHistoryPayload ApplicantWorkHistories = 1;
 }

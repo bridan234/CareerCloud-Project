@@ -27,6 +27,16 @@ namespace CareerCloud.WebAPI
         {
 
             services.AddMvc();
+            services.AddControllers();
+            services.AddMvc()
+                .AddNewtonsoftJson(
+                 s =>
+                    s
+                        .SerializerSettings
+                        .ReferenceLoopHandling
+                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });

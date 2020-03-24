@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service CompanyDescription{
 	rpc ReadCompanyDescription (CompanyDescriptionIdRequest) returns (CompanyDescriptionPayload);
-	//rpc GetAllCompanyDescription (google.protobuf.Empty) returns (CompanyDescriptionPayload);
+	rpc GetAllCompanyDescription (google.protobuf.Empty) returns (AllCompanyDescriptionPayload);
 	rpc CreateCompanyDescription (CompanyDescriptionPayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyDescription (CompanyDescriptionPayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyDescription (CompanyDescriptionPayload) returns (google.protobuf.Empty);
@@ -23,6 +23,9 @@ message CompanyDescriptionPayload {
 	string Company = 2;
 	string LanguageId = 3;
 	string CompanyName = 4;
-	string CompanyDescription = 5;
-	
+	string CompanyDescription = 5;	
+}
+
+message AllCompanyDescriptionPayload {
+	repeated CompanyDescriptionPayload CompanyDescriptions = 1;
 }

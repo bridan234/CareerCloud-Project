@@ -51,6 +51,25 @@ namespace CareerCloud.gRPC.Services
             return null;
         }
 
+        public override Task<AllCompanyJobPayload> GetAllCompanyJob(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Job record was found");
+
+            var AllCompanyJobPayload = new AllCompanyJobPayload();
+
+            Pocos.ForEach(poco => AllCompanyJobPayload.CompanyJobs.Add(new CompanyJobPayload
+            {
+                Id = poco.Id.ToString(),
+                Company = poco.Company.ToString(),
+                IsCompanyHidden = poco.IsCompanyHidden,
+                IsInactive = poco.IsInactive,
+                ProfileCreadted = Timestamp.FromDateTime((DateTime)poco.ProfileCreated)
+            }));
+
+            return new Task<AllCompanyJobPayload>(() => AllCompanyJobPayload);
+        }
+
         public override Task<Empty> UpdateCompanyJob(CompanyJobPayload request, ServerCallContext context)
         {
             _ = _logic.Get(Guid.Parse(request.Id)) ?? throw new ArgumentNullException("No Company Job Record with this Id Found");

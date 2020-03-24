@@ -33,6 +33,24 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllApplicantResumePayload> GetAllApplicantResume(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Resume record was found");
+
+            var AllApplicantResumePayload = new AllApplicantResumePayload();
+
+            Pocos.ForEach(poco => AllApplicantResumePayload.ApplicantResumes.Add(new ApplicantResumePayload
+            {
+                Id = poco.Id.ToString(),
+                Applicant = poco.Applicant.ToString(),
+                Resume = poco.Resume,
+                LastUpdated = poco.LastUpdated is null ? null : Timestamp.FromDateTime((DateTime)poco.LastUpdated)
+            }));
+
+            return new Task<AllApplicantResumePayload>(() => AllApplicantResumePayload);
+        }
+
         public override Task<Empty> CreateApplicantResume(ApplicantResumePayload request, ServerCallContext context)
         {
 

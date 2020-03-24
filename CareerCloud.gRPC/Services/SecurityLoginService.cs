@@ -41,8 +41,34 @@ namespace CareerCloud.gRPC.Services
                 AgreementAccepted = poco.AgreementAccepted != null ? Timestamp.FromDateTime((DateTime)poco.AgreementAccepted) : null,
                 Created = poco.Created != null ? Timestamp.FromDateTime((DateTime)poco.Created) : null,
                 PasswordUpdate = poco.Created != null ? Timestamp.FromDateTime((DateTime)poco.Created) : null,
-                
             });
+        }
+
+        public override Task<AllSecurityLoginPayload> GetAllSecurityLogin(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Security Login record was found");
+
+            var AllSecurityLoginPayload = new AllSecurityLoginPayload();
+
+            Pocos.ForEach(poco => AllSecurityLoginPayload.SecurityLogins.Add(new SecurityLoginPayload
+            {
+                Id = poco.Id.ToString(),
+                Login = poco.Login,
+                EmailAddress = poco.EmailAddress,
+                ForceChangePassword = poco.ForceChangePassword,
+                Password = poco.Password,
+                FullName = poco.FullName,
+                PhoneNumber = poco.PhoneNumber,
+                PrefferredLanguage = poco.PrefferredLanguage,
+                IsInactive = poco.IsInactive,
+                IsLocked = poco.IsLocked,
+                AgreementAccepted = poco.AgreementAccepted != null ? Timestamp.FromDateTime((DateTime)poco.AgreementAccepted) : null,
+                Created = poco.Created != null ? Timestamp.FromDateTime((DateTime)poco.Created) : null,
+                PasswordUpdate = poco.Created != null ? Timestamp.FromDateTime((DateTime)poco.Created) : null,
+            }));
+
+            return new Task<AllSecurityLoginPayload>(() => AllSecurityLoginPayload);
         }
 
         public override Task<Empty> CreateSecurityLogin(SecurityLoginPayload request, ServerCallContext context)

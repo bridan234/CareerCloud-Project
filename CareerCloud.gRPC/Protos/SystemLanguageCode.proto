@@ -7,8 +7,8 @@ package CareerCloud.gRPC;
 import "google/protobuf/empty.proto";
 
 service SystemLanguageCode {
-	rpc ReadSystemLanguageCode(SystemLanguageCodeIdRequest) returns (SystemLanguageCodePayload);
-	//rpc GetAllSystemLanguageCode (google.protobuf.Empty) returns (SystemLanguageCodePayload);
+	rpc ReadSystemLanguageCode (SystemLanguageCodeIdRequest) returns (SystemLanguageCodePayload);
+	rpc GetAllSystemLanguageCode (google.protobuf.Empty) returns (AllSystemLanguageCodePayload);
 	rpc CreateSystemLanguageCode (SystemLanguageCodePayload) returns (google.protobuf.Empty);
 	rpc UpdateSystemLanguageCode (SystemLanguageCodePayload) returns (google.protobuf.Empty);
 	rpc DeleteSystemLanguageCode (SystemLanguageCodePayload) returns (google.protobuf.Empty);
@@ -22,4 +22,8 @@ message SystemLanguageCodePayload {
 	string LanguageID = 1;
 	string Name = 2;
 	string NativeName = 3;
+}
+
+message AllSystemLanguageCodePayload {
+	repeated SystemLanguageCodePayload SystemLanguageCodes = 1;
 }

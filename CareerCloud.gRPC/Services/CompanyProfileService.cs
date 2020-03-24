@@ -38,6 +38,26 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllCompanyProfilePayload> GetAllCompanyProfile(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Profile record was found");
+
+            var AllCompanyProfilePayload = new AllCompanyProfilePayload();
+
+            Pocos.ForEach(poco => AllCompanyProfilePayload.CompanyProfiles.Add(new CompanyProfilePayload
+            {
+                Id = poco.Id.ToString(),
+                ContactName = poco.ContactName,
+                ContactPhone = poco.ContactPhone,
+                CompanyWebsite = poco.CompanyWebsite,
+                RegistrationDate = Timestamp.FromDateTime(poco.RegistrationDate),
+                CompanyLogo = ByteString.CopyFrom(poco.CompanyLogo)
+            }));
+
+            return new Task<AllCompanyProfilePayload>(() => AllCompanyProfilePayload);
+        }
+
         public override Task<Empty> CreateCompanyProfile(CompanyProfilePayload request, ServerCallContext context)
         {
             CompanyProfilePoco poco = new CompanyProfilePoco()

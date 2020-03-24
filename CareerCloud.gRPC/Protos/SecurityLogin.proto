@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 service SecurityLogin{
 	rpc ReadSecurityLogin (SecurityLoginIdRequest) returns (SecurityLoginPayload);
-	//rpc GetAllCompanyProfile (google.protobuf.Empty) returns (SecurityLoginPayload);
+	rpc GetAllSecurityLogin (google.protobuf.Empty) returns (AllSecurityLoginPayload);
 	rpc CreateSecurityLogin (SecurityLoginPayload) returns (google.protobuf.Empty);
 	rpc UpdateSecurityLogin (SecurityLoginPayload) returns (google.protobuf.Empty);
 	rpc DeleteSecurityLogin (SecurityLoginPayload) returns (google.protobuf.Empty);
@@ -33,4 +33,8 @@ message SecurityLoginPayload {
 	string FullName = 11;
 	bool ForceChangePassword = 12;
 	string PrefferredLanguage = 13;
+}
+
+message AllSecurityLoginPayload {
+	repeated SecurityLoginPayload SecurityLogins = 1;
 }

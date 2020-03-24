@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service ApplicantSkill{
 	rpc ReadApplicantSkill (ApplicantSkillIdRequest) returns (ApplicantSkillPayload);
-	//rpc GetAllApplicantSkill (google.protobuf.Empty) returns (AllApplicantSkillPayload);
+	rpc GetAllApplicantSkill (google.protobuf.Empty) returns (AllApplicantSkillPayload);
 	rpc CreateApplicantSkill (ApplicantSkillPayload) returns (google.protobuf.Empty);
 	rpc UpdateApplicantSkill (ApplicantSkillPayload) returns (google.protobuf.Empty);
 	rpc DeleteApplicantSkill (ApplicantSkillPayload) returns (google.protobuf.Empty);
@@ -27,4 +27,8 @@ message ApplicantSkillPayload {
 	int32 EndMonth = 6;
 	int32 StartYear = 7;
 	int32 EndYear = 8;
+}
+
+message AllApplicantSkillPayload {
+	repeated ApplicantSkillPayload ApplicantSkills = 1;
 }

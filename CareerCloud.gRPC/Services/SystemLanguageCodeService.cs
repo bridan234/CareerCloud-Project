@@ -34,6 +34,23 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllSystemLanguageCodePayload> GetAllSystemLanguageCode(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No System Language Code record was found");
+
+            var AllSystemLanguageCodePayload = new AllSystemLanguageCodePayload();
+
+            Pocos.ForEach(poco => AllSystemLanguageCodePayload.SystemLanguageCodes.Add(new SystemLanguageCodePayload
+            {
+                LanguageID = poco.LanguageID,
+                Name = poco.Name,
+                NativeName = poco.NativeName
+            }));
+
+            return new Task<AllSystemLanguageCodePayload>(() => AllSystemLanguageCodePayload);
+        }
+
         public override Task<Empty> CreateSystemLanguageCode(SystemLanguageCodePayload request, ServerCallContext context)
         {
             SystemLanguageCodePoco poco = new SystemLanguageCodePoco()

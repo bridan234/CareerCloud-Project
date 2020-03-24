@@ -39,6 +39,28 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllApplicantSkillPayload> GetAllApplicantSkill(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Skill record was found");
+
+            var AllApplicantSkillPayload = new AllApplicantSkillPayload();
+
+            Pocos.ForEach(poco => AllApplicantSkillPayload.ApplicantSkills.Add(new ApplicantSkillPayload
+            {
+                Id = poco.Id.ToString(),
+                Applicant = poco.Applicant.ToString(),
+                Skill = poco.Skill,
+                SkillLevel = poco.Skill,
+                StartMonth = poco.StartMonth,
+                EndMonth = poco.EndMonth,
+                StartYear = poco.StartYear,
+                EndYear = poco.EndYear,
+            }));
+
+            return new Task<AllApplicantSkillPayload>(() => AllApplicantSkillPayload);
+        }
+
         public override Task<Empty> CreateApplicantSkill(ApplicantSkillPayload request, ServerCallContext context)
         {
             ApplicantSkillPoco poco = new ApplicantSkillPoco() 

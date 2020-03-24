@@ -9,7 +9,7 @@ import "google/protobuf/wrappers.proto";
 
 service ApplicantProfile{
 	rpc ReadApplicantProfile (ApplicantProfileIdRequest) returns (ApplicantProfilePayload);
-	//rpc GetAllApplicantProfile (google.protobuf.Empty) returns (AllApplicantProfilePayload);
+	rpc GetAllApplicantProfile (google.protobuf.Empty) returns (AllApplicantProfilePayload);
 	rpc CreateApplicantProfile (ApplicantProfilePayload) returns (google.protobuf.Empty);
 	rpc UpdateApplicantProfile (ApplicantProfilePayload) returns (google.protobuf.Empty);
 	rpc DeleteApplicantProfile (ApplicantProfilePayload) returns (google.protobuf.Empty);
@@ -31,4 +31,8 @@ message ApplicantProfilePayload {
 	string City = 9;
 	string PostalCode = 10;
 
+}
+
+message AllApplicantProfilePayload {
+	repeated ApplicantProfilePayload ApplicantProfiles = 1;
 }

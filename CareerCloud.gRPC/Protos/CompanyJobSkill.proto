@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service CompanyJobSkills{
 	rpc ReadCompanyJobSkill (CompanyJobSkillsIdRequest) returns (CompanyJobSkillsPayload);
-	//rpc GetAllCompanyJobSkill (google.protobuf.Empty) returns (CompanyJobSkillsPayload);
+	rpc GetAllCompanyJobSkill (google.protobuf.Empty) returns (AllCompanyJobSkillsPayload);
 	rpc CreateCompanyJobSkill (CompanyJobSkillsPayload) returns (google.protobuf.Empty);
 	rpc UpdateCompanyJobSkill (CompanyJobSkillsPayload) returns (google.protobuf.Empty);
 	rpc DeleteCompanyJobSkill (CompanyJobSkillsPayload) returns (google.protobuf.Empty);
@@ -24,5 +24,8 @@ message CompanyJobSkillsPayload {
 	string Skill =3;
 	string SkillLevel = 4;
 	int32 Importance = 5;
+}
 
+message AllCompanyJobSkillsPayload {
+	repeated CompanyJobSkillsPayload CompanyJobSkills = 1;
 }

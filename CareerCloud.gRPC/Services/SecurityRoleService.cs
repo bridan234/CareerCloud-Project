@@ -34,6 +34,24 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllSecurityRolePayload> GetAllSecurityRole(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Security Role record was found");
+
+            var AllSecurityRolePayload = new AllSecurityRolePayload();
+
+            Pocos.ForEach(poco => AllSecurityRolePayload.SecurityRoles.Add(new SecurityRolePayload
+            {
+                Id = poco.Id.ToString(),
+                Role = poco.Role,
+                IsInactive = poco.IsInactive,
+            }));
+
+            return new Task<AllSecurityRolePayload>(() => AllSecurityRolePayload);
+        }
+
+
         public override Task<Empty> CreateSecurityRole(SecurityRolePayload request, ServerCallContext context)
         {
             SecurityRolePoco poco = new SecurityRolePoco()

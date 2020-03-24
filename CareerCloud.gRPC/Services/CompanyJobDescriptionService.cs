@@ -35,6 +35,24 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllCompanyJobDescriptionPayload> GetAllCompanyJobDescription(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Job Description record was found");
+
+            var AllCompanyJobDescriptionPayload = new AllCompanyJobDescriptionPayload();
+
+            Pocos.ForEach(poco => AllCompanyJobDescriptionPayload.CompanyJobDescriptions.Add(new CompanyJobDescriptionPayload
+            {
+                Id = poco.Id.ToString(),
+                Job = poco.Job.ToString(),
+                JobName = poco.JobName,
+                JobDescription = poco.JobDescriptions
+            }));
+
+            return new Task<AllCompanyJobDescriptionPayload>(() => AllCompanyJobDescriptionPayload);
+        }
+
         public override Task<Empty> CreateCompanyJobDescription(CompanyJobDescriptionPayload request, ServerCallContext context)
         {
             CompanyJobDescriptionPoco poco = new CompanyJobDescriptionPoco()

@@ -35,6 +35,25 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllCompanyJobEducationPayload> GetAllCompanyJobEducation(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Company Job Education record was found");
+
+            var AllCompanyJobEducationPayload = new AllCompanyJobEducationPayload();
+
+            Pocos.ForEach(poco => AllCompanyJobEducationPayload.CompanyJobEducations.Add(new CompanyJobEducationPayload
+            {
+                Id = poco.Id.ToString(),
+                Job = poco.Job.ToString(),
+                Importance = poco.Importance,
+                Major = poco.Major
+            }));
+
+            return new Task<AllCompanyJobEducationPayload>(() => AllCompanyJobEducationPayload);
+        }
+
+
         public override Task<Empty> CreateCompanyJobEducation(CompanyJobEducationPayload request, ServerCallContext context)
         {
             CompanyJobEducationPoco poco = new CompanyJobEducationPoco()

@@ -41,7 +41,31 @@ namespace CareerCloud.gRPC.Services
                 EndYear = poco.EndYear,
             });
         }
-        
+
+        public override Task<AllApplicantWorkHistoryPayload> GetAllApplicantWorkHistory(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Work History record was found");
+
+            var AllApplicantWorkHistoryPayload = new AllApplicantWorkHistoryPayload();
+
+            Pocos.ForEach(poco => AllApplicantWorkHistoryPayload.ApplicantWorkHistories.Add(new ApplicantWorkHistoryPayload
+            {
+                Id = poco.Id.ToString(),
+                Applicant = poco.Applicant.ToString(),
+                CompanyName = poco.CompanyName,
+                CountryCode = poco.CountryCode,
+                JobDescription = poco.JobDescription,
+                JobTitle = poco.JobTitle,
+                Location = poco.Location,
+                StartMonth = poco.StartMonth,
+                EndMonth = poco.EndMonth,
+                StartYear = poco.StartYear,
+                EndYear = poco.EndYear,
+            }));
+
+            return new Task<AllApplicantWorkHistoryPayload>(() => AllApplicantWorkHistoryPayload);
+        }
         public override Task<Empty> CreateApplicantWorkHistory(ApplicantWorkHistoryPayload request, ServerCallContext context)
         {
             ApplicantWorkHistoryPoco poco = new ApplicantWorkHistoryPoco()

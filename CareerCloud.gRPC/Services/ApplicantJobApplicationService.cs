@@ -38,6 +38,24 @@ namespace CareerCloud.gRPC.Services
             return AppJobApp;
         }
 
+        public override Task<AllApplicantJobApplicationPayload> GetAllApplicantJobApplication(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Applicant Job Application record was found");
+
+            var AllApplicantJobApplicationPayload = new AllApplicantJobApplicationPayload();
+
+            Pocos.ForEach(poco => AllApplicantJobApplicationPayload.ApplicantJobApplications.Add(new ApplicantJobApplicationPayload
+            {
+                Id = poco.Id.ToString(),
+                Applicant = poco.Applicant.ToString(),
+                Job = poco.Job.ToString(),
+                ApplicationDate = Timestamp.FromDateTime(poco.ApplicationDate)
+            }));
+
+            return new Task<AllApplicantJobApplicationPayload>(() => AllApplicantJobApplicationPayload);
+        }
+
         public override Task<Empty> CreateApplicantJobApplication(ApplicantJobApplicationPayload request, ServerCallContext context)
         {
             var poco = new ApplicantJobApplicationPoco()

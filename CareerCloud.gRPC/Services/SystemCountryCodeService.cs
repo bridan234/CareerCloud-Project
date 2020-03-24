@@ -33,6 +33,22 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllSystemCountryCodePayload> GetAllSystemCountryCode(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No System Country Code record was found");
+
+            var AllSystemCountryCodePayload = new AllSystemCountryCodePayload();
+
+            Pocos.ForEach(poco => AllSystemCountryCodePayload.SystemCountryCodes.Add(new SystemCountryCodePayload
+            {
+                Code = poco.Code,
+                Name = poco.Name
+            }));
+
+            return new Task<AllSystemCountryCodePayload>(() => AllSystemCountryCodePayload);
+        }
+
         public override Task<Empty> CreateSystemCountryCode(SystemCountryCodePayload request, ServerCallContext context)
         {
             SystemCountryCodePoco poco = new SystemCountryCodePoco()

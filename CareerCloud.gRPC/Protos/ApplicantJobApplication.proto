@@ -9,7 +9,7 @@ import "google/protobuf/timestamp.proto";
 
 service ApplicantJobApplication{
 	rpc ReadApplicantJobApplication (ApplicantJobApplicationIdRequest) returns (ApplicantJobApplicationPayload);
-	//rpc GetAllApplicantJobApplication (google.protobuf.Empty) returns (AllApplicantEducationPayload);
+	rpc GetAllApplicantJobApplication (google.protobuf.Empty) returns (AllApplicantJobApplicationPayload);
 	rpc CreateApplicantJobApplication (ApplicantJobApplicationPayload) returns (google.protobuf.Empty);
 	rpc UpdateApplicantJobApplication (ApplicantJobApplicationPayload) returns (google.protobuf.Empty);
 	rpc DeleteApplicantJobApplication (ApplicantJobApplicationPayload) returns (google.protobuf.Empty);
@@ -24,4 +24,8 @@ message ApplicantJobApplicationPayload {
 	string Applicant = 2;
 	string Job = 3;
 	google.protobuf.Timestamp ApplicationDate = 4;
+}
+
+message AllApplicantJobApplicationPayload {
+	repeated ApplicantJobApplicationPayload ApplicantJobApplications = 1;
 }

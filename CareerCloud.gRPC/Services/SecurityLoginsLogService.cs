@@ -37,6 +37,25 @@ namespace CareerCloud.gRPC.Services
             });
         }
 
+        public override Task<AllSecurityLoginsLogPayload> GetAllSecurityLoginsLog(Empty request, ServerCallContext context)
+        {
+            var Pocos = _logic.GetAll();
+            _ = Pocos ?? throw new ArgumentNullException("  No Security Login Log record was found");
+
+            var AllSecurityLoginsLogPayload = new AllSecurityLoginsLogPayload();
+
+            Pocos.ForEach(poco => AllSecurityLoginsLogPayload.SecurityLoginLogs.Add(new SecurityLoginsLogPayload
+            {
+                Id = poco.Id.ToString(),
+                Login = poco.Login.ToString(),
+                IsSuccesful = poco.IsSuccesful,
+                SourceIP = poco.SourceIP,
+                LogonDate = Timestamp.FromDateTime(poco.LogonDate)
+            }));
+
+            return new Task<AllSecurityLoginsLogPayload>(() => AllSecurityLoginsLogPayload);
+        }
+
         public override Task<Empty> CreateSecurityLoginsLog(SecurityLoginsLogPayload request, ServerCallContext context)
         {
             SecurityLoginsLogPoco poco = new SecurityLoginsLogPoco()

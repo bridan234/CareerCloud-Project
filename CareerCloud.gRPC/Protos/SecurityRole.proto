@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service SecurityRole{
 	rpc ReadSecurityRole (SecurityRoleIdRequest) returns (SecurityRolePayload);
-	//rpc GetAllSecurityRole (google.protobuf.Empty) returns (SecurityRolePayload);
+	rpc GetAllSecurityRole (google.protobuf.Empty) returns (AllSecurityRolePayload);
 	rpc CreateSecurityRole (SecurityRolePayload) returns (google.protobuf.Empty);
 	rpc UpdateSecurityRole (SecurityRolePayload) returns (google.protobuf.Empty);
 	rpc DeleteSecurityRole (SecurityRolePayload) returns (google.protobuf.Empty);
@@ -22,4 +22,8 @@ message SecurityRolePayload {
 	string Id = 1;
 	string Role = 2;
 	bool IsInactive = 3;
+}
+
+message AllSecurityRolePayload {
+	repeated SecurityRolePayload SecurityRoles = 1;
 }
